@@ -7,23 +7,23 @@ const DEBOUNCE_DELAY = 300;
 const inputRef = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
-console.log(inputRef);
+// console.log(inputRef);
 
 inputRef.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch() {
   console.log(inputRef.value);
   const name = inputRef.value.trim();
-  if (name === ' ') {
-    countryInfo.innerHTML = ' ';
-    countryList.innerHTML = ' ';
+  if (name === '') {
+    countryInfo.innerHTML = '';
+    countryList.innerHTML = '';
     return;
   }
 
   fetchCountries(name)
     .then(countries => {
-      countryList.innerHTML = ' ';
-      countryInfo.innerHTML = ' ';
+      countryList.innerHTML = '';
+      countryInfo.innerHTML = '';
       if (countries.length === 1) {
         countryList.insertAdjacentHTML(
           'beforeend',
@@ -34,7 +34,7 @@ function onSearch() {
           renderCountryInfo(countries)
         );
       } else if (countries.length >= 10) {
-        alertTooManyMatches();
+        alertManyMatches();
       } else {
         countryList.insertAdjacentHTML(
           'beforeend',
@@ -81,7 +81,7 @@ function alertWrongName() {
   Notiflix.Notify.failure('Oops, there is no country with that name');
 }
 
-function alertTooManyMatches() {
+function alertManyMatches() {
   Notiflix.Notify.info(
     'Too many matches found. Please enter a more specific name.'
   );
