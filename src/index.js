@@ -12,7 +12,7 @@ const countryInfo = document.querySelector('.country-info');
 inputRef.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch() {
-  console.log(inputRef.value);
+  // console.log(inputRef.value);
   const name = inputRef.value.trim();
   if (name === '') {
     countryInfo.innerHTML = '';
